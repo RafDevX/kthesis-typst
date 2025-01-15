@@ -26,3 +26,53 @@
 #let join-names(names) = {
   return names.join(", ", last: t("separator-last"))
 }
+
+#let omit-dict-none(d) = {
+  return d.pairs().filter(((_, v)) => v != none).to-dict()
+}
+
+// This function most definitely should not exist, but alas...
+#let content-to-newline-aware-html(content) = {
+  if content.func() == text {
+    content.at("text").replace("<", "&lt;").replace(">", "&gt;")
+  } else if content.has("children") {
+    content.at("children").map(content-to-newline-aware-html).join("").trim()
+  } else if content == [ ] {
+    " "
+  } else if content.func() == linebreak {
+    "\n"
+  } else if content.func() == parbreak {
+    "\n\n"
+  } else if content.func() == smartquote {
+    if content.at("double") {
+      "\""
+    } else {
+      "'"
+    }
+  } else {
+    let tag = if content.func() == emph {
+      "i"
+    } else if content.func() == strong {
+      "strong"
+    } else if content.func() == super {
+      "sup"
+    } else if content.func() == sub {
+      "sub"
+    } else {
+      panic("Cannot serialize content: " + json.encode(content))
+    }
+
+    let body = content-to-newline-aware-html(content.at("body")).trim()
+
+    "<" + tag + ">" + body + "</" + tag + ">"
+  }
+}
+
+#let content-to-html(content) = {
+  // ensure conversion from string to content, if needed
+  let newline-aware = content-to-newline-aware-html([#content])
+
+  let with-breaks = newline-aware.replace("\n\n", "<br>")
+
+  "<p>" + with-breaks.replace("\n", "</p><p>") + "</p>"
+}
