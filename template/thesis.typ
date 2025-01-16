@@ -2,6 +2,13 @@
 // vv FIXME: use actual package name
 #import "../src/lib.typ": kth-thesis, setup-appendices
 
+// The template is extensible and plays well with other dependencies;
+// For example, a table of acronyms can be generated using glossarium
+#import "@preview/glossarium:0.5.1": make-glossary, register-glossary, print-glossary
+#import "./acronyms.typ": acronyms
+#show: make-glossary
+#register-glossary(acronyms)
+
 #show: kth-thesis.with(primary-lang: "en")
 
 // Tip: when tagging elements, scope labels like <intro:goals:example>
@@ -17,3 +24,7 @@
 #show: setup-appendices
 #include "./content/zz-a-usage.typ"
 #include "./content/zz-b-else.typ"
+
+= Temporary Appendix
+// TODO: make this an extra preamble
+#print-glossary(acronyms)
