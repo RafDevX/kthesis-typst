@@ -10,8 +10,6 @@
 ) = page(
   margin: (top: 12.5mm, rest: 25mm),
   {
-    // TODO: actual cover format; this is just a poc, needs review
-
     set align(center)
     set text(size: 12pt, font: "Liberation Sans") // Arial is proprietary...
 
@@ -50,8 +48,6 @@
 ) = page(
   margin: (top: 65mm, bottom: 30mm, left: 74pt, right: 35mm),
   {
-    // TODO: actual cover format
-
     set text(size: 12pt, font: "Liberation Sans") // Arial is proprietary...
 
     v(1fr)

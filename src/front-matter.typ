@@ -17,8 +17,6 @@
 ) = page(
   margin: (top: 65mm, bottom: 30mm, left: 74pt, right: 35mm),
   {
-    // TODO: follow actual title page format
-
     text(size: 25pt, strong(title))
 
     v(10pt)
@@ -76,8 +74,6 @@
 ) = page(
   margin: (top: 250mm, bottom: 30mm, left: 74pt, right: 35mm),
   {
-    // TODO: follow actual copyright page format
-
     v(1fr)
 
     [#sym.copyright #year #sym.space.quad #join-names(authors)]
@@ -91,8 +87,6 @@
   keywords: ("Magic", "Wonder"),
   body,
 ) = {
-  // TODO: follow actual abstract page format
-
   if abstract-heading == none {
     abstract-heading = t("abstract-heading")
   }
@@ -121,8 +115,6 @@
   authors: ("Gary Lose", "Harriet Lung"),
   body,
 ) = {
-  // TODO: follow actual acknowledgements page format
-
   heading(outlined: false, depth: 1, t("ack-heading"))
 
   body

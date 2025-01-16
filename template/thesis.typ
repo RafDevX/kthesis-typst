@@ -9,6 +9,10 @@
 #show: make-glossary
 #register-glossary(acronyms)
 
+// Configure formatting options before invoking the template;
+// For example, uncomment below to set another font (except for covers)
+// #set text(font: "New Computer Modern")
+
 #show: kth-thesis.with(primary-lang: "en")
 
 // Tip: when tagging elements, scope labels like <intro:goals:example>
