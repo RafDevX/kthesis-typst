@@ -66,7 +66,7 @@
       external-org: "Företag AB",
     ),
   ),
-  // Thesis examiner; must be internal so all fields are mandatory
+  // Thesis examiner; must be internal to the school so all fields are mandatory
   examiner: (
     first-name: "Charlie",
     last-names: "Johnson",
@@ -82,10 +82,10 @@
     credits: 30,
   ),
   // Degree as part of which the thesis is conducted; all fields are mandatory.
-  // Cycle is either 1 (Bachelor's) or 2 (Master's), per Bologna.
   // Subject area is main field of study as listed in the second dropdown here:
   // https://www.kth.se/en/student/studier/examen/examensregler-1.5685
-  // Kind is the degree title conferred as listed in the third dropdown above
+  // Kind is the degree title conferred as listed in the third dropdown above.
+  // Cycle is either 1 (Bachelor's) or 2 (Master's), per Bologna.
   degree: (
     code: "TCYSM",
     name: "Master's Program, Cybersecurity",
@@ -97,7 +97,7 @@
   // One or more 3-to-5 digit codes, with preference for 5-digit codes, from:
   // https://www.scb.se/contentassets/10054f2ef27c437884e8cde0d38b9cc4/standard-for-svensk-indelning--av-forskningsamnen-2011-uppdaterad-aug-2016.pdf
   national-subject-categories: ("10201", "10206"),
-  // School that the thesis is part of
+  // School that the thesis is part of (abbreviation)
   school: "EECS",
   // TRITA number assigned to thesis after final examiner approval
   trita-number: "2024:0000",
