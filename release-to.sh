@@ -18,13 +18,15 @@ if [ ! -f "./typst.toml" ]; then
 fi
 
 VERSION="$(grep 'version' ./typst.toml | cut -d'"' -f2)"
+DEST="$1/$VERSION"
 
-if [ -d "$1/$VERSION" ]; then
+if [ -d "$DEST" ]; then
     echo "ERROR: Target directly already has version $VERSION."
     exit 4
 fi
 
-mkdir "$1/$VERSION"
-git ls-files | grep -v "release-to.sh" | xargs cp -t "$1/$VERSION"
+
+mkdir "$DEST"
+git ls-files -z | grep -zv "release-to.sh" | rsync -a --files-from=- --from0 ./ "$DEST"
 
 echo "Success! Released version $VERSION"
