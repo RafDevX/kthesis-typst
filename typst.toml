@@ -9,6 +9,7 @@ repository = "https://github.com/RafDevX/kthesis-typst"
 categories = ["thesis", "layout"]
 keywords = ["KTH", "Kungliga Tekniska högskolan", "exjobb", "master", "thesis"]
 compiler = "0.12.0"
+exclude = [".gitignore", "*.sh", "shell.nix", ".envrc"]
 
 [template]
 path = "template"
