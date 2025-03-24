@@ -1,7 +1,7 @@
 #import "./utils.typ": t, kth-blue
 
 #import "@preview/headcount:0.1.0": dependent-numbering
-#import "@preview/hydra:0.5.2": hydra
+#import "@preview/hydra:0.6.0": hydra
 
 #let header() = context {
   let chapter = hydra(1, skip-starting: false, display: (ctx, h) => h.body)
