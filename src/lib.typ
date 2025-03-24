@@ -89,7 +89,7 @@
   degree: (
     code: "TCYSM",
     name: "Master's Program, Cybersecurity",
-    subject-area: "Technology",
+    subject-area: "Computer Science and Engineering",
     kind: "Master of Science",
     cycle: 2,
   ),
