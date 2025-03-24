@@ -162,6 +162,8 @@
 #include "./content/ch06-discussion.typ"
 #include "./content/ch07-conclusion.typ"
 
+#bibliography("references.yaml", title: "References")
+
 #show: setup-appendices
 #include "./content/zz-a-usage.typ"
 #include "./content/zz-b-else.typ"
