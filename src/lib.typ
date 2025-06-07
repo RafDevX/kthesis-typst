@@ -160,8 +160,7 @@
 
   set document(
     title: get-one-liner(primary-lang, primary-info),
-    // vvv - will be available in Typst 0.13.0 (update typst.toml#compiler!)
-    // description: get-one-liner(alt-lang, alt-info), // Subject field
+    description: get-one-liner(alt-lang, alt-info), // Subject field
     date: doc-date,
     keywords: primary-info.at("keywords") + doc-extra-keywords,
     author: author-names,
