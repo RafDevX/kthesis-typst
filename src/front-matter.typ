@@ -4,7 +4,7 @@
   title: "Primary Language Title Goes Here",
   subtitle: "Primary Language Subtitle Goes Here",
   alt-title: "Alternative Language Title Goes Here",
-  alt-subtitle: "Alternative Language Title Goes Here",
+  alt-subtitle: "Alternative Language Subtitle Goes Here", // may be none!
   alt-lang: "sv", // either "en" or "sv"
   degree: "Master's Program, Computer Science",
   date: datetime.today(),
@@ -63,7 +63,9 @@
 
     [
       *#t("alt-title"):* #text(lang: alt-lang, alt-title) \
-      *#t("alt-subtitle"):* #text(lang: alt-lang, alt-subtitle)
+      #if alt-subtitle != none {
+        [*#t("alt-subtitle"):* #text(lang: alt-lang, alt-subtitle)]
+      }
     ]
   },
 )
