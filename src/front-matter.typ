@@ -2,7 +2,7 @@
 
 #let title-page(
   title: "Primary Language Title Goes Here",
-  subtitle: "Primary Language Subtitle Goes Here",
+  subtitle: "Primary Language Subtitle Goes Here", // may be none!
   alt-title: "Alternative Language Title Goes Here",
   alt-subtitle: "Alternative Language Subtitle Goes Here", // may be none!
   alt-lang: "sv", // either "en" or "sv"
@@ -20,8 +20,11 @@
     text(size: 25pt, strong(title))
 
     v(10pt)
-
-    text(size: 18pt, subtitle)
+    if subtitle != none {
+      text(size: 18pt, subtitle)
+    } else {
+      text(size: 18pt, "")
+    }
 
     v(10mm)
 
