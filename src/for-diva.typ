@@ -50,7 +50,7 @@
 #let serialize-title(lang, info) = {
   (
     "Main title": info.at("title"),
-    "Subtitle": info.at("subtitle"),
+    "Subtitle": info.at("subtitle", default: ""),
     "Language": info.at("alpha-3", default: serialize-lang(lang)),
   )
 }
