@@ -1,4 +1,4 @@
-#import "@preview/kthesis:0.1.1": kth-thesis, setup-appendices
+#import "@preview/kthesis:0.1.2": kth-thesis, setup-appendices
 
 // The template is extensible and plays well with other dependencies;
 // For example, a table of acronyms can be generated using glossarium
