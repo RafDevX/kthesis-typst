@@ -11,6 +11,7 @@
   // Grouped by language, with only values for "en" and "sv" being mandatory.
   // Localized abstract/keywords headings may be omitted only for "en" and "sv".
   // Field "alpha-3" is the language's ISO 639-3 code, for non-"en"/"sv" langs.
+  // If desired, any "subtitle" field may be set to none (to omit it entirely).
   localized-info: (
     en: (
       title: "How to Abandon Dinosaur-Age TypeSetting Software",

@@ -11,6 +11,10 @@
   let title = info.at("title")
   let subtitle = info.at("subtitle")
 
+  if subtitle == none {
+    return title
+  }
+
   // I don't really understand why this is the intended behavior either...
   if lang == "sv" {
     title + " - " + subtitle
