@@ -1,6 +1,6 @@
 [package]
 name = "kthesis"
-version = "0.1.2"
+version = "0.1.3"
 entrypoint = "src/lib.typ"
 authors = ["Rafael Oliveira <@RafDevX>"]
 license = "MIT AND MIT-0"
