@@ -1,4 +1,4 @@
-#import "./utils.typ": omit-dict-none, content-to-html
+#import "./utils.typ": content-to-html, content-to-string, omit-dict-none
 
 // what has humanity done to deserve this structure and its pervasiveness?
 
@@ -49,8 +49,8 @@
 
 #let serialize-title(lang, info) = {
   (
-    "Main title": info.at("title"),
-    "Subtitle": info.at("subtitle", default: ""),
+    "Main title": content-to-string(info.at("title")),
+    "Subtitle": content-to-string(info.at("subtitle", default: "")),
     "Language": info.at("alpha-3", default: serialize-lang(lang)),
   )
 }
