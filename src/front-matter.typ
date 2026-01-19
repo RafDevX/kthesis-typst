@@ -21,11 +21,9 @@
 
     v(10pt)
 
-    if subtitle == none {
-      subtitle = "" // take up vertical space, but don't print anything
+    if subtitle != none {
+      text(size: 18pt, subtitle)
     }
-
-    text(size: 18pt, subtitle)
 
     v(10mm)
 
