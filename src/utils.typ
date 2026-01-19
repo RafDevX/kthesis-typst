@@ -9,7 +9,7 @@
 
 #let get-one-liner(lang, info) = {
   let title = info.at("title")
-  let subtitle = info.at("subtitle")
+  let subtitle = info.at("subtitle", default: none)
 
   if subtitle == none {
     return title
