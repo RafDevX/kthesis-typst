@@ -105,8 +105,9 @@
     cycle: 2,
   ),
   // National subject category codes; mandatory for DiVA classification.
-  // One or more 3-to-5 digit codes, with preference for 5-digit codes, from (select latest dated PDF):
+  // One or more 3-to-5 digit codes, with preference for 5-digit codes, from:
   // https://www.scb.se/dokumentation/klassifikationer-och-standarder/standard-for-svensk-indelning-av-forskningsamnen/
+  // ^ (select from that page the most recent PDF)
   national-subject-categories: ("10201", "10206"),
   // School that the thesis is part of (abbreviation)
   school: "EECS",
