@@ -19,9 +19,9 @@
   {
     text(size: 25pt, strong(title))
 
-    v(10pt)
-
     if subtitle != none {
+      v(10pt)
+
       text(size: 18pt, subtitle)
     }
 
