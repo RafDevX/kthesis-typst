@@ -146,6 +146,39 @@
   // Document body
   body,
 ) = {
+  // Coerce singles as arrays as a QoL
+  if type(authors) != array {
+    authors = (authors,)
+  }
+
+  if type(supervisors) != array {
+    supervisors = (supervisors,) 
+  }
+
+  if type(national-subject-categories) != array {
+    national-subject-categories = (national-subject-categories,)
+  }
+
+  if type(opponents) != array {
+    opponents = (opponents,)
+  }
+
+  if type(extra-preambles) != array {
+    extra-preambles = (extra-preambles,)
+  }
+
+  if type(doc-extra-keywords) != array {
+    doc-extra-keywords = (doc-extra-keywords,)
+  }
+
+  for (lang, info) in localized-info {
+    let keywords = info.at("keywords")
+    if type(keywords) != array {
+      // for loop makes a copy so the full path must be manually accessed
+      localized-info.at(lang).insert("keywords", (keywords,))
+    }
+  }
+
   let alt-lang = if primary-lang == "en" {
     "sv"
   } else if primary-lang == "sv" {
