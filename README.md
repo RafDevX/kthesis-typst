@@ -127,8 +127,9 @@ from the provided DOTX templates, but future bids at refining fidelity may be
 attempted in the future, especially if and when LaTeX versions are published.
 
 The covers use Arial, which is a proprietary font and may be difficult to get
-access to. If Arial is available it will be used, otherwise it is replaced
-by an open, metric-compatible substitute; Liberation Sans.
+access to. This template will use Arial if it is available on the system at
+compile-time; otherwise, it will be replaced by an open, metric-compatible
+substitute: Liberation Sans.
 
 ## Licensing
 
