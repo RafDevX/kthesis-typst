@@ -11,7 +11,8 @@
   margin: (top: 12.5mm, rest: 25mm),
   {
     set align(center)
-    set text(size: 12pt, font: "Liberation Sans") // Arial is proprietary...
+    // Prioritize Arial if available, otherwise use Liberation Sans
+    set text(size: 12pt, font: ("Arial", "Liberation Sans"))
 
     image("../assets/KTH_logo_RGB_bla.svg", width: 37.45mm)
 
@@ -48,7 +49,8 @@
 ) = page(
   margin: (top: 65mm, bottom: 30mm, left: 74pt, right: 35mm),
   {
-    set text(size: 12pt, font: "Liberation Sans") // Arial is proprietary...
+    // Prioritize Arial if available, otherwise use Liberation Sans
+    set text(size: 12pt, font: ("Arial", "Liberation Sans"))
 
     v(1fr)
 
