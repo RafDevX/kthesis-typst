@@ -31,7 +31,7 @@
       #text(size: 26pt, strong(title)) \
       \
       #if subtitle != none [
-        text(size: 16pt, subtitle)
+        #text(size: 16pt, subtitle)
         \
       ]
 
