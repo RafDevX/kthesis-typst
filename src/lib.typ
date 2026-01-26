@@ -171,7 +171,7 @@
 
   front-cover(
     title: primary-info.at("title"),
-    subtitle: primary-info.at("subtitle"),
+    subtitle: primary-info.at("subtitle", default: none),
     authors: author-names,
     subject-area: degree.at("subject-area"),
     cycle: degree.at("cycle"),
@@ -182,9 +182,9 @@
 
   title-page(
     title: primary-info.at("title"),
-    subtitle: primary-info.at("subtitle"),
+    subtitle: primary-info.at("subtitle", default: none),
     alt-title: alt-info.at("title"),
-    alt-subtitle: alt-info.at("subtitle"),
+    alt-subtitle: alt-info.at("subtitle", default: none),
     alt-lang: alt-lang,
     degree: degree.at("name"),
     date: doc-date,

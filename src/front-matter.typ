@@ -19,13 +19,11 @@
   {
     text(size: 25pt, strong(title))
 
-    v(10pt)
+    if subtitle != none {
+      v(10pt)
 
-    if subtitle == none {
-      subtitle = "" // take up vertical space, but don't print anything
+      text(size: 18pt, subtitle)
     }
-
-    text(size: 18pt, subtitle)
 
     v(10mm)
 
