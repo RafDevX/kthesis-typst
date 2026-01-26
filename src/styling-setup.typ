@@ -1,4 +1,4 @@
-#import "./utils.typ": t, kth-blue
+#import "./utils.typ": kth-blue, t
 
 #import "@preview/headcount:0.1.0": dependent-numbering
 #import "@preview/hydra:0.6.1": hydra

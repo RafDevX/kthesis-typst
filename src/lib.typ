@@ -2,7 +2,7 @@
 #import "./front-matter.typ": *
 #import "./styling-setup.typ": *
 #import "./for-diva.typ": for-diva-json
-#import "./utils.typ": get-one-liner, extract-name
+#import "./utils.typ": extract-name, get-one-liner
 
 #let kth-thesis(
   // Primary document language; either "en" or "sv"

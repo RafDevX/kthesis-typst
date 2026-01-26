@@ -37,7 +37,10 @@
 
 // This function most definitely should not exist, but alas...
 #let content-to-string(it, mode: "plain") = {
-  assert(mode == "plain" or mode == "html", message: "mode must be 'plain' or 'html'")
+  assert(
+    mode == "plain" or mode == "html",
+    message: "mode must be 'plain' or 'html'",
+  )
   let content-to-string = content-to-string.with(mode: mode)
 
   let escape-body = body => {
@@ -100,7 +103,11 @@
       tag-or-plain("sub", content-to-string(it.body))
     } else if it.func() == link and type(it.dest) == str {
       if mode == "html" {
-        tag-or-plain("a", content-to-string(it.body), attrs: "href='" + it.dest + "'")
+        tag-or-plain(
+          "a",
+          content-to-string(it.body),
+          attrs: "href='" + it.dest + "'",
+        )
       } else {
         it.body
       }

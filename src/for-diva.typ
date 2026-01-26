@@ -92,7 +92,9 @@
     }
 
     omit-dict-none((
-      "Date": presentation.at("slot").display("[year]-[month]-[day] [hour]:[minute]"),
+      "Date": presentation
+        .at("slot")
+        .display("[year]-[month]-[day] [hour]:[minute]"),
       "Language": serialize-lang(presentation.at("language")),
       "Room": location.at("room", default: online-room),
       "Address": location.at("address", default: none),

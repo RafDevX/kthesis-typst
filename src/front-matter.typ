@@ -1,4 +1,4 @@
-#import "./utils.typ": t, join-names
+#import "./utils.typ": join-names, t
 
 #let title-page(
   title: "Primary Language Title Goes Here",
