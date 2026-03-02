@@ -1,4 +1,4 @@
-#import "./utils.typ": t
+#import "./utils.typ": font-sans, t
 
 #let front-cover(
   title: "Example Title in Primary Language",
@@ -12,7 +12,7 @@
   {
     set align(center)
     // Prioritize Arial if available, otherwise use Liberation Sans
-    set text(size: 12pt, font: ("Arial", "Liberation Sans"))
+    set text(size: 12pt, font: font-sans)
 
     image("../assets/KTH_logo_RGB_bla.svg", width: 37.45mm)
 
@@ -53,7 +53,7 @@
   margin: (top: 65mm, bottom: 30mm, left: 74pt, right: 35mm),
   {
     // Prioritize Arial if available, otherwise use Liberation Sans
-    set text(size: 12pt, font: ("Arial", "Liberation Sans"))
+    set text(size: 12pt, font: font-sans)
 
     v(1fr)
 

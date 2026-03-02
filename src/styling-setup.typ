@@ -1,10 +1,10 @@
-#import "./utils.typ": kth-blue, t
+#import "./utils.typ": font-sans, kth-blue, t
 
 #import "@preview/headcount:0.1.0": dependent-numbering
 #import "@preview/hydra:0.6.1": hydra
 
 #let header() = context {
-  set text(font: ("Arial", "Liberation Sans"))
+  set text(font: font-sans)
   
   let chapter = hydra(1, skip-starting: false, display: (ctx, h) => h.body)
 
@@ -29,7 +29,7 @@
 
   set par(justify: true)
 
-  show heading: set text(font: ("Arial", "Liberation Sans"))
+  show heading: set text(font: font-sans)
 
   // front matter only; essentially styles [h1 as h2] and [h2 as h3]
   show heading.where(level: 1): set text(size: 18pt)
