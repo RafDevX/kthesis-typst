@@ -23,7 +23,7 @@
     if subtitle != none {
       v(10pt)
 
-      text(size: 18pt, subtitle)
+      text(size: 18pt, strong(subtitle))
     }
 
     v(10mm)
@@ -137,7 +137,7 @@
 #let indices = {
   let styled-outline(title, target: none) = {
     show outline.entry: it => {
-      let entry-indent = (it.level - 1) * 1.5em
+      let entry-indent = (it.level - 1) * 2em
       let colored = text.with(fill: rgb("#cf1e26"))
 
       pad(left: entry-indent, link(it.element.location(), if it.prefix() == none [
