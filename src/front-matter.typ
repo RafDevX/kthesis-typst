@@ -1,4 +1,4 @@
-#import "./utils.typ": join-names, t
+#import "./utils.typ": font-sans, join-names, t
 
 #let title-page(
   title: "Primary Language Title Goes Here",
@@ -17,12 +17,13 @@
 ) = page(
   margin: (top: 65mm, bottom: 30mm, left: 74pt, right: 35mm),
   {
+    set text(size: 12pt, font: font-sans)
     text(size: 25pt, strong(title))
 
     if subtitle != none {
       v(10pt)
 
-      text(size: 18pt, subtitle)
+      text(size: 18pt, strong(subtitle))
     }
 
     v(10mm)
@@ -35,8 +36,8 @@
     v(1fr)
 
     [
-      *#degree* \
-      *#t("date"):* #date.display("[month repr:long] [day], [year]")
+      #degree \
+      #t("date"): #date.display("[month repr:long] [day], [year]")
     ]
 
     v(5mm)
@@ -48,25 +49,25 @@
     }
 
     [
-      *#super-label:* #join-names(supervisors) \
-      *#t("examiner"):* #examiner-name \
-      #hide[*#t("examiner"):*] #emph(examiner-school) \
+      #super-label: #join-names(supervisors) \
+      #t("examiner"): #examiner-name \
+      #hide[#t("examiner"):] #emph(examiner-school) \
     ]
 
     if host-company != none {
-      [*#t("host-company"):* #host-company]
+      [#t("host-company"): #host-company]
       linebreak()
     }
 
     if host-org != none {
-      [*#t("host-org"):* #host-org]
+      [#t("host-org"): #host-org]
       linebreak()
     }
 
     [
-      *#t("alt-title"):* #text(lang: alt-lang, alt-title) \
+      #t("alt-title"): #text(lang: alt-lang, alt-title) \
       #if alt-subtitle != none {
-        [*#t("alt-subtitle"):* #text(lang: alt-lang, alt-subtitle)]
+        [#t("alt-subtitle"): #text(lang: alt-lang, alt-subtitle)]
       }
     ]
   },
@@ -78,6 +79,7 @@
 ) = page(
   margin: (top: 250mm, bottom: 30mm, left: 74pt, right: 35mm),
   {
+    set text(font: font-sans)
     v(1fr)
 
     [#sym.copyright #year #sym.space.quad #join-names(authors)]
@@ -133,32 +135,70 @@
 }
 
 #let indices = {
-  pagebreak(weak: true, to: "odd")
-  {
+  let styled-outline(title, target: none) = {
+    show outline.entry: it => {
+      let entry-indent = (it.level - 1) * 2em
+      let colored = text.with(fill: rgb("#cf1e26"))
+
+      pad(left: entry-indent, link(it.element.location(), if it.prefix() == none [
+        #colored(it.body())
+        #box(width: 1fr, it.fill)
+        #it.page()
+      ] else {
+        let prefix = if it.element.func() == figure {
+          context {
+            let chapter = counter(heading.where(level: 1)).at(it.element.location()).first()
+            let fig-num = counter(figure.where(kind: it.element.kind)).at(it.element.location()).last()
+            colored(numbering("1.1", chapter, fig-num))
+          }
+        } else {
+          colored(it.prefix())
+        }
+        grid(
+          columns: (auto, 1fr),
+          gutter: 0.75em,
+          prefix, [#colored(it.body()) #box(width: 1fr, it.fill) #it.page()],
+        )
+      }))
+    }
+
+    set outline.entry(fill: repeat(text(".", fill: luma(0)), gap: 0.5em))
+
     show outline.entry.where(level: 1): it => {
-      v(1em, weak: true)
+      v(1.5em, weak: true)
       strong(it)
     }
 
-    outline(title: t("table-of-contents"), indent: auto)
+    show heading: set text(size: 1.5em)
+    heading(bookmarked: false, outlined: false, title)
+    v(2.5em)
+    if target == none {
+      show outline.entry.where(level: 1): set outline.entry(fill: none)
+      outline(title: none, indent: auto)
+    } else {
+      outline(title: none, target: target, indent: auto)
+    }
   }
+
+  pagebreak(weak: true, to: "odd")
+  styled-outline(t("table-of-contents"))
 
   let images-target = figure.where(kind: image, outlined: true)
   context if (query(images-target).len() > 0) {
     pagebreak(weak: true, to: "odd")
-    outline(title: t("list-of-figures"), target: images-target)
+    styled-outline(t("list-of-figures"), target: images-target)
   }
 
   let tables-target = figure.where(kind: table, outlined: true)
   context if (query(tables-target).len() > 0) {
     pagebreak(weak: true, to: "odd")
-    outline(title: t("list-of-tables"), target: tables-target)
+    styled-outline(t("list-of-tables"), target: tables-target)
   }
 
   let code-target = figure.where(kind: raw, outlined: true)
   context if (query(code-target).len() > 0) {
     pagebreak(weak: true, to: "odd")
-    outline(title: t("list-of-listings"), target: code-target)
+    styled-outline(t("list-of-listings"), target: code-target)
   }
 }
 

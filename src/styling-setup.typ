@@ -1,9 +1,11 @@
-#import "./utils.typ": kth-blue, t
+#import "./utils.typ": font-sans, kth-blue, t
 
 #import "@preview/headcount:0.1.0": dependent-numbering
 #import "@preview/hydra:0.6.1": hydra
 
 #let header() = context {
+  set text(font: font-sans)
+  
   let chapter = hydra(1, skip-starting: false, display: (ctx, h) => h.body)
 
   let number = counter(page).display(here().page-numbering())
@@ -27,6 +29,8 @@
 
   set par(justify: true)
 
+  show heading: set text(font: font-sans)
+
   // front matter only; essentially styles [h1 as h2] and [h2 as h3]
   show heading.where(level: 1): set text(size: 18pt)
   show heading.where(level: 2): set text(size: 14pt)
@@ -41,7 +45,7 @@
 }
 
 #let styled-body(body) = {
-  set heading(numbering: "1.1.", supplement: t("section"))
+  set heading(numbering: "1.1", supplement: t("section"))
 
   show heading: set text(size: 12pt) // for level > 3
   show heading.where(level: 1): set text(size: 25pt)
@@ -60,11 +64,12 @@
     if it.numbering == none {
       it.body
     } else {
-      let numbering = it.numbering.slice(0, -1) // remove trailing .
-      let number = counter(heading).display(numbering)
+      let number = counter(heading).display(it.numbering)
 
       [
         #it.supplement #number \
+
+        // intentional newline above for extra spacing
         #it.body
       ]
 
@@ -86,7 +91,7 @@
 }
 
 #let setup-appendices(body) = {
-  set heading(numbering: "A.1.")
+  set heading(numbering: "A.1")
   counter(heading).update(0)
   show heading.where(level: 1): set heading(supplement: t("appendix"))
 

@@ -5,6 +5,8 @@
 
 #let lang-db = toml("./lang.toml")
 
+#let font-sans = ("Arial", "Liberation Sans")
+
 #let t = key => linguify(key, from: lang-db)
 
 #let get-one-liner(lang, info) = {
