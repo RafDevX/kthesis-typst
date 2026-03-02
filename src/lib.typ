@@ -213,7 +213,7 @@
           info.at("abstract"),
         ),
       )
-      page(header: none, footer: none, []) // blank
+      page[] // blank
     }
 
     page(

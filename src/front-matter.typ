@@ -36,8 +36,8 @@
     v(1fr)
 
     [
-      *#degree* \
-      *#t("date"):* #date.display("[month repr:long] [day], [year]")
+      #degree \
+      #t("date"): #date.display("[month repr:long] [day], [year]")
     ]
 
     v(5mm)
@@ -49,25 +49,25 @@
     }
 
     [
-      *#super-label:* #join-names(supervisors) \
-      *#t("examiner"):* #examiner-name \
-      #hide[*#t("examiner"):*] #emph(examiner-school) \
+      #super-label: #join-names(supervisors) \
+      #t("examiner"): #examiner-name \
+      #hide[#t("examiner"):] #emph(examiner-school) \
     ]
 
     if host-company != none {
-      [*#t("host-company"):* #host-company]
+      [#t("host-company"): #host-company]
       linebreak()
     }
 
     if host-org != none {
-      [*#t("host-org"):* #host-org]
+      [#t("host-org"): #host-org]
       linebreak()
     }
 
     [
-      *#t("alt-title"):* #text(lang: alt-lang, alt-title) \
+      #t("alt-title"): #text(lang: alt-lang, alt-title) \
       #if alt-subtitle != none {
-        [*#t("alt-subtitle"):* #text(lang: alt-lang, alt-subtitle)]
+        [#t("alt-subtitle"): #text(lang: alt-lang, alt-subtitle)]
       }
     ]
   },
