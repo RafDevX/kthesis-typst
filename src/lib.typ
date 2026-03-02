@@ -168,6 +168,7 @@
   )
   set page("a4")
   set text(lang: primary-lang, size: 12pt)
+  show heading: set block(above: 1.75em, below: 1em) // Margin above and below headings
 
   front-cover(
     title: primary-info.at("title"),
