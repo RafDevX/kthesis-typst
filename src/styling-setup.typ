@@ -4,6 +4,8 @@
 #import "@preview/hydra:0.6.1": hydra
 
 #let header() = context {
+  set text(font: ("Arial", "Liberation Sans"))
+  
   let chapter = hydra(1, skip-starting: false, display: (ctx, h) => h.body)
 
   let number = counter(page).display(here().page-numbering())
@@ -26,6 +28,8 @@
   )
 
   set par(justify: true)
+
+  show heading: set text(font: ("Arial", "Liberation Sans"))
 
   // front matter only; essentially styles [h1 as h2] and [h2 as h3]
   show heading.where(level: 1): set text(size: 18pt)

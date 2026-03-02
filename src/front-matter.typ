@@ -1,4 +1,4 @@
-#import "./utils.typ": join-names, t
+#import "./utils.typ": font-sans, join-names, t
 
 #let title-page(
   title: "Primary Language Title Goes Here",
@@ -17,6 +17,7 @@
 ) = page(
   margin: (top: 65mm, bottom: 30mm, left: 74pt, right: 35mm),
   {
+    set text(size: 12pt, font: font-sans)
     text(size: 25pt, strong(title))
 
     if subtitle != none {
@@ -78,6 +79,7 @@
 ) = page(
   margin: (top: 250mm, bottom: 30mm, left: 74pt, right: 35mm),
   {
+    set text(font: font-sans)
     v(1fr)
 
     [#sym.copyright #year #sym.space.quad #join-names(authors)]
