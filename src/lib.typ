@@ -2,7 +2,7 @@
 #import "./front-matter.typ": *
 #import "./styling-setup.typ": *
 #import "./for-diva.typ": for-diva-json
-#import "./utils.typ": extract-name, get-one-liner
+#import "./utils.typ": extract-name, get-one-liner, maybe-sans-serif
 
 #let kth-thesis(
   // Primary document language; either "en" or "sv"
@@ -151,9 +151,11 @@
   // on the system at compile-time.
   // Graceful font fallback is not possible until issue typst#6010 is fixed.
   use-arial: false,
+  // Whether front matter, headings, and headings should use a Sans-Serif font
+  more-sans-serif: false,
   // Document body
   body,
-) = {
+) = context {
   let alt-lang = if primary-lang == "en" {
     "sv"
   } else if primary-lang == "sv" {
@@ -189,6 +191,8 @@
 
   page[] // blank
 
+  set text(font: maybe-sans-serif(more-sans-serif, use-arial))
+
   title-page(
     title: primary-info.at("title"),
     subtitle: primary-info.at("subtitle", default: none),
@@ -207,7 +211,7 @@
 
   copyright-page(year: doc-date.year(), authors: author-names)
 
-  global-setup({
+  global-setup(more-sans-serif, use-arial, {
     set page(numbering: "i")
     counter(page).update(1)
 
@@ -241,6 +245,10 @@
 
     [#metadata(()) <front-matter-end>]
     pagebreak(to: "odd")
+
+    // text.font reflects original font because of the `context` surrounding
+    // this entire function (prior to when the font was changed)
+    set text(font: text.font)
 
     set page(numbering: "1")
     counter(page).update(1)

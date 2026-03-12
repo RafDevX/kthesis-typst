@@ -17,6 +17,15 @@
   return fonts
 }
 
+// needs to be invoked from within a `context` block (to access `text.font`)
+#let maybe-sans-serif(enable, use-arial) = {
+  if enable {
+    sans-serif(use-arial)
+  } else {
+    text.font
+  }
+}
+
 #let get-one-liner(lang, info) = {
   let title = info.at("title")
   let subtitle = info.at("subtitle", default: none)

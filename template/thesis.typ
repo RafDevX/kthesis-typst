@@ -162,6 +162,8 @@
   // on the system at compile-time.
   // Graceful font fallback is not possible until issue typst#6010 is fixed.
   use-arial: false,
+  // Whether front matter, headings, and headings should use a Sans-Serif font
+  more-sans-serif: false,
 )
 
 // Tip: when tagging elements, scope labels like <intro:goals:example>

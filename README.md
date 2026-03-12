@@ -95,6 +95,7 @@ available:
 - `doc-extra-keywords`: Additional keywords for document metadata (but not text)
 - `with-for-diva`: Whether to include meta "For DiVA" section after back cover
 - `use-arial`: Whether to use the proprietary "Arial" font (must be available)
+- `more-sans-serif`: Whether to use a Sans-Serif font in more places than covers
 
 Exact syntax and semantics for each option are shown in the starter `thesis.typ`
 main file provided by this template.
