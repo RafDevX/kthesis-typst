@@ -3,8 +3,8 @@
 #import "@preview/headcount:0.1.0": dependent-numbering
 #import "@preview/hydra:0.6.1": hydra
 
-#let header(more-sans-serif, use-arial) = context {
-  set text(font: maybe-sans-serif(more-sans-serif, use-arial))
+#let header(style) = context {
+  set text(font: maybe-sans-serif(style))
 
   let chapter = hydra(1, skip-starting: false, display: (ctx, h) => h.body)
 
@@ -17,19 +17,19 @@
   }
 }
 
-#let global-setup(more-sans-serif, use-arial, body) = context {
+#let global-setup(style, body) = context {
   set page(
     // I don't like these numbers, especially the bottom margin...
     margin: (top: 37mm, bottom: 50mm, inside: 45mm, outside: 35mm),
     header-ascent: 15mm + 6mm,
     footer-descent: 25mm,
-    header: header(more-sans-serif, use-arial),
+    header: header(style),
     footer: none,
   )
 
   set par(justify: true)
 
-  show heading: set text(font: maybe-sans-serif(more-sans-serif, use-arial))
+  show heading: set text(font: maybe-sans-serif(style))
 
   // front matter only; essentially styles [h1 as h2] and [h2 as h3]
   show heading.where(level: 1): set text(size: 18pt)

@@ -143,19 +143,19 @@
   doc-extra-keywords: ("master thesis",),
   // Whether to include trailing "For DiVA" metadata structure section
   with-for-diva: true,
-  // Whether the proprietary "Arial" font should be used in Sans-Serif contexts.
-  // While this is the font prescribed by the official KTH covers, it is often
-  // preferable to use an open, metric-compatible alternative. If this is set to
-  // `false`, "Liberation Sans" will be used instead of "Arial". Otherwise, if
-  // this is set to `true`, Typst will issue a warning if "Arial" is not found
-  // on the system at compile-time.
-  // Graceful font fallback is not possible until issue typst#6010 is fixed.
-  use-arial: false,
-  // Whether front matter, headings, and headings should use a Sans-Serif font
-  more-sans-serif: false,
+  // Miscellaneous settings affecting the document's appearance
+  style: (:),
   // Document body
   body,
 ) = context {
+  let style = (
+    (
+      more-sans-serif: false,
+      use-arial: false,
+    )
+      + style // provided values have higher precedence over default values
+  )
+
   let alt-lang = if primary-lang == "en" {
     "sv"
   } else if primary-lang == "sv" {
@@ -186,12 +186,12 @@
     subject-area: degree.at("subject-area"),
     cycle: degree.at("cycle"),
     credits: course.at("credits"),
-    use-arial: use-arial,
+    style,
   )
 
   page[] // blank
 
-  set text(font: maybe-sans-serif(more-sans-serif, use-arial))
+  set text(font: maybe-sans-serif(style))
 
   title-page(
     title: primary-info.at("title"),
@@ -211,7 +211,7 @@
 
   copyright-page(year: doc-date.year(), authors: author-names)
 
-  global-setup(more-sans-serif, use-arial, {
+  global-setup(style, {
     set page(numbering: "i")
     counter(page).update(1)
 
@@ -266,7 +266,7 @@
     trita-series: trita-series,
     trita-number: trita-number,
     year: doc-date.year(),
-    use-arial: use-arial,
+    style,
   )
 
   context if with-for-diva {

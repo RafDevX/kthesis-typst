@@ -7,12 +7,12 @@
   subject-area: "Technology",
   cycle: 2,
   credits: 15,
-  use-arial: false,
+  style,
 ) = page(
   margin: (top: 12.5mm, rest: 25mm),
   {
     set align(center)
-    set text(size: 12pt, font: sans-serif(use-arial))
+    set text(size: 12pt, font: sans-serif(style))
 
     image("../assets/KTH_logo_RGB_bla.svg", width: 37.45mm)
 
@@ -49,11 +49,11 @@
   trita-series: "EECS-EX",
   trita-number: "2026:0000",
   year: 2026,
-  use-arial: false,
+  style,
 ) = page(
   margin: (top: 65mm, bottom: 30mm, left: 74pt, right: 35mm),
   {
-    set text(size: 12pt, font: sans-serif(use-arial))
+    set text(size: 12pt, font: sans-serif(style))
 
     v(1fr)
 

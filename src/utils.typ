@@ -7,10 +7,10 @@
 
 #let t = key => linguify(key, from: lang-db)
 
-#let sans-serif(use-arial) = {
+#let sans-serif(style) = {
   let fonts = ("Liberation Sans",)
 
-  if use-arial {
+  if style.use-arial {
     fonts.insert(0, "Arial")
   }
 
@@ -18,9 +18,9 @@
 }
 
 // needs to be invoked from within a `context` block (to access `text.font`)
-#let maybe-sans-serif(enable, use-arial) = {
-  if enable {
-    sans-serif(use-arial)
+#let maybe-sans-serif(style) = {
+  if style.more-sans-serif {
+    sans-serif(style)
   } else {
     text.font
   }
