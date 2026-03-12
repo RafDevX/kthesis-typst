@@ -114,7 +114,7 @@
   // School that the thesis is part of (abbreviation)
   school: "EECS",
   // TRITA number assigned to thesis after final examiner approval
-  trita-number: "2024:0000",
+  trita-number: "2026:0000",
   // Host company collaborating for this thesis; may be none
   host-company: "Företag AB",
   // Host organization collaborating for this thesis; may be none
@@ -126,7 +126,7 @@
   presentation: (
     language: "en",
     slot: datetime(
-      year: 2025,
+      year: 2026,
       month: 6,
       day: 14,
       hour: 13,

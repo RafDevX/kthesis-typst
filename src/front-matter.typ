@@ -73,7 +73,7 @@
 )
 
 #let copyright-page(
-  year: 2025,
+  year: 2026,
   authors: ("Astronaut Boulder", "Cat Dog"),
 ) = page(
   margin: (top: 250mm, bottom: 30mm, left: 74pt, right: 35mm),

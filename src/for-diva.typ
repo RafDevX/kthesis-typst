@@ -118,7 +118,7 @@
   host-org: none,
   national-subject-categories: (),
   trita-series: "TRITA-EECS-EX",
-  trita-number: "2025:0000",
+  trita-number: "2026:0000",
   opponents: none,
   presentation: none,
   doc-date: datetime.today(),
