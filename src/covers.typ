@@ -1,4 +1,4 @@
-#import "./utils.typ": t
+#import "./utils.typ": sans-serif, t
 
 #let front-cover(
   title: "Example Title in Primary Language",
@@ -7,12 +7,12 @@
   subject-area: "Technology",
   cycle: 2,
   credits: 15,
+  use-arial: false,
 ) = page(
   margin: (top: 12.5mm, rest: 25mm),
   {
     set align(center)
-    // Prioritize Arial if available, otherwise use Liberation Sans
-    set text(size: 12pt, font: ("Arial", "Liberation Sans"))
+    set text(size: 12pt, font: sans-serif(use-arial))
 
     image("../assets/KTH_logo_RGB_bla.svg", width: 37.45mm)
 
@@ -49,11 +49,11 @@
   trita-series: "EECS-EX",
   trita-number: "2024:0000",
   year: 2025,
+  use-arial: false,
 ) = page(
   margin: (top: 65mm, bottom: 30mm, left: 74pt, right: 35mm),
   {
-    // Prioritize Arial if available, otherwise use Liberation Sans
-    set text(size: 12pt, font: ("Arial", "Liberation Sans"))
+    set text(size: 12pt, font: sans-serif(use-arial))
 
     v(1fr)
 

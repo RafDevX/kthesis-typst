@@ -154,6 +154,14 @@
   doc-extra-keywords: ("master thesis",),
   // Whether to include trailing "For DiVA" metadata structure section
   with-for-diva: true,
+  // Whether the proprietary "Arial" font should be used in Sans-Serif contexts.
+  // While this is the font prescribed by the official KTH covers, it is often
+  // preferable to use an open, metric-compatible alternative. If this is set to
+  // `false`, "Liberation Sans" will be used instead of "Arial". Otherwise, if
+  // this is set to `true`, Typst will issue a warning if "Arial" is not found
+  // on the system at compile-time.
+  // Graceful font fallback is not possible until issue typst#6010 is fixed.
+  use-arial: false,
 )
 
 // Tip: when tagging elements, scope labels like <intro:goals:example>

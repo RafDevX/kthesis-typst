@@ -94,6 +94,7 @@ available:
 - `doc-city`: Document city, for acknowledgments signature
 - `doc-extra-keywords`: Additional keywords for document metadata (but not text)
 - `with-for-diva`: Whether to include meta "For DiVA" section after back cover
+- `use-arial`: Whether to use the proprietary "Arial" font (must be available)
 
 Exact syntax and semantics for each option are shown in the starter `thesis.typ`
 main file provided by this template.
@@ -128,8 +129,8 @@ attempted in the future, especially if and when LaTeX versions are published.
 
 The covers use Arial, which is a proprietary font and may be difficult to get
 access to. This template will use Arial if it is available on the system at
-compile-time; otherwise, it will be replaced by an open, metric-compatible
-substitute: Liberation Sans.
+compile-time and `use-arial` is enabled; otherwise, it will be replaced by an
+open, metric-compatible substitute: Liberation Sans.
 
 ## Licensing
 

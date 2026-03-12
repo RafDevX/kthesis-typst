@@ -7,6 +7,16 @@
 
 #let t = key => linguify(key, from: lang-db)
 
+#let sans-serif(use-arial) = {
+  let fonts = ("Liberation Sans",)
+
+  if use-arial {
+    fonts.insert(0, "Arial")
+  }
+
+  return fonts
+}
+
 #let get-one-liner(lang, info) = {
   let title = info.at("title")
   let subtitle = info.at("subtitle", default: none)
