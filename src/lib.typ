@@ -152,6 +152,7 @@
     (
       more-sans-serif: false,
       use-arial: false,
+      fancy-chapters: false,
     )
       + style // provided values have higher precedence over default values
   )
@@ -253,7 +254,7 @@
     set page(numbering: "1")
     counter(page).update(1)
 
-    styled-body(body)
+    styled-body(style, body)
   })
 
   let trita-series = school + "-EX"

@@ -44,7 +44,7 @@
   body
 }
 
-#let styled-body(body) = {
+#let styled-body(style, body) = {
   set heading(numbering: "1.1.", supplement: t("section"))
 
   show heading: set text(size: 12pt) // for level > 3
@@ -67,10 +67,29 @@
       let numbering = it.numbering.slice(0, -1) // remove trailing .
       let number = counter(heading).display(numbering)
 
-      [
-        #it.supplement #number \
-        #it.body
-      ]
+      if style.fancy-chapters {
+        [
+          #set align(end)
+
+          #text(fill: rgb("#444"), [
+            #upper(it.supplement) #box(rect(
+              fill: rgb("#444"),
+              outset: 2pt,
+              text(
+                size: 60pt,
+                fill: white,
+                align(center, number),
+              ),
+            ))
+          ]) \
+          #text(size: 36pt, strong(it.body))
+        ]
+      } else {
+        [
+          #it.supplement #number \
+          #it.body
+        ]
+      }
 
       v(1em)
     }

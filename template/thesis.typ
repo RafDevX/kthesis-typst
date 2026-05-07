@@ -166,6 +166,8 @@
     use-arial: false,
     // Whether front matter, headings, and headings should use a Sans-Serif font
     more-sans-serif: false,
+    // Whether to make top-level headings stand out more and look less plain
+    fancy-chapters: false,
   ),
 )
 
