@@ -1,4 +1,4 @@
-#import "@preview/linguify:0.4.2": linguify
+#import "@preview/linguify:0.5.0": linguify
 
 #let kth-blue = rgb("#004791")
 #let kth-navy = rgb("#000061")
