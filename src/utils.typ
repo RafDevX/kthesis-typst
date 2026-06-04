@@ -7,6 +7,22 @@
 
 #let t = key => linguify(key, from: lang-db)
 
+#let assert-arg-type(name, value, expected_type, optional: false) = {
+  if optional and value == none {
+    // all good
+    return
+  }
+
+  assert.eq(
+    type(value),
+    expected_type,
+    message: "kthesis argument `"
+      + name
+      + "` must be of type "
+      + str(expected_type),
+  )
+}
+
 #let sans-serif(style) = {
   let fonts = ("Liberation Sans",)
 

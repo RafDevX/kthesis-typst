@@ -2,7 +2,9 @@
 #import "./front-matter.typ": *
 #import "./styling-setup.typ": *
 #import "./for-diva.typ": for-diva-json
-#import "./utils.typ": extract-name, get-one-liner, maybe-sans-serif
+#import "./utils.typ": (
+  assert-arg-type, extract-name, get-one-liner, maybe-sans-serif,
+)
 
 #let kth-thesis(
   // Primary document language; either "en" or "sv"
@@ -148,6 +150,38 @@
   // Document body
   body,
 ) = context {
+  // manual type checking because typst sadly has no strong typing and sometimes
+  // incorrect arguments can lead to very strange errors that are hard to debug
+  // (especially when accidentally using `(x)` instead of `(x,)` to construct an
+  // array, leading to no array being constructed at all)
+  // this only applies very simple type checking to top-level arguments, it is
+  // just a small convenience to catch the most obvious errors
+  assert-arg-type("primary-lang", primary-lang, str)
+  assert-arg-type("localized-info", localized-info, dictionary)
+  assert-arg-type("authors", authors, array)
+  assert-arg-type("supervisors", supervisors, array)
+  assert-arg-type("examiner", examiner, dictionary)
+  assert-arg-type("course", course, dictionary)
+  assert-arg-type("degree", degree, dictionary)
+  assert-arg-type(
+    "national-subject-categories",
+    national-subject-categories,
+    array,
+  )
+  assert-arg-type("school", school, str)
+  assert-arg-type("trita-number", trita-number, str)
+  assert-arg-type("host-company", host-company, str, optional: true)
+  assert-arg-type("host-org", host-org, str, optional: true)
+  assert-arg-type("opponents", opponents, array, optional: true)
+  assert-arg-type("presentation", presentation, dictionary, optional: true)
+  assert-arg-type("acknowledgements", acknowledgements, content)
+  assert-arg-type("extra-preambles", extra-preambles, array)
+  assert-arg-type("doc-date", doc-date, datetime)
+  assert-arg-type("doc-city", doc-city, str)
+  assert-arg-type("doc-extra-keywords", doc-extra-keywords, array)
+  assert-arg-type("with-for-diva", with-for-diva, bool)
+  assert-arg-type("style", style, dictionary)
+
   let style = (
     (
       more-sans-serif: false,
