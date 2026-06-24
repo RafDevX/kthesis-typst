@@ -166,8 +166,8 @@
     more-sans-serif: false,
     // Whether to make top-level headings stand out more and look less plain
     fancy-chapters: false,
-    // Add path to cover image to use on the cover page
-    //  Size of the cover image can be adjusted using `image-size`(optional)
+    // Pass cover image using the typst `image` function, e.g.
+    // cover-image: image("image.png", width: 16cm, height: 10cm)
     cover-image: none,
   ),
 )

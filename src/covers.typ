@@ -43,10 +43,12 @@
       linebreak()
     }
 
+    // 800 twips (40pt) of vertical space, 120 twips after author and 680 twips before image
+    // as per official KTH cover template
     v(40pt)
 
     if style.cover-image != none {
-      image(style.cover-image, width: style.image-size.width, height: style.image-size.height)
+      style.cover-image
     }
   },
 )
