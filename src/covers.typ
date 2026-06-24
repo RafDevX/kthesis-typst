@@ -43,7 +43,7 @@
       linebreak()
     }
 
-    v(4em)
+    v(40pt)
 
     if style.cover-image != none {
       image(style.cover-image, width: style.image-size.width, height: style.image-size.height)
