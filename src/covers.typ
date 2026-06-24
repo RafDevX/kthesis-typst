@@ -42,6 +42,12 @@
       strong(upper(author))
       linebreak()
     }
+
+    v(4em)
+
+    if style.cover-image != none {
+      image(style.cover-image, width: style.image-size.width, height: style.image-size.height)
+    }
   },
 )
 

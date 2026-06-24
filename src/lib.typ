@@ -153,6 +153,8 @@
       more-sans-serif: false,
       use-arial: false,
       fancy-chapters: false,
+      cover-image: none,
+      image-size: (width: 16.7cm, height: 9.2cm), // Default image size is same as placeholder in KTH cover
     )
       + style // provided values have higher precedence over default values
   )
