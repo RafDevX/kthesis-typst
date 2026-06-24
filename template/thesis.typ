@@ -2,9 +2,7 @@
 
 // The template is extensible and plays well with other dependencies;
 // For example, a table of acronyms can be generated using glossarium
-#import "@preview/glossarium:0.5.10": (
-  make-glossary, print-glossary, register-glossary,
-)
+#import "@preview/glossarium:0.5.10": make-glossary, print-glossary, register-glossary
 #import "./acronyms.typ": acronyms
 #show: make-glossary
 #register-glossary(acronyms)
@@ -168,6 +166,9 @@
     more-sans-serif: false,
     // Whether to make top-level headings stand out more and look less plain
     fancy-chapters: false,
+    // Add path to cover image to use on the cover page
+    //  Size of the cover image can be adjusted using `image-size`(optional)
+    cover-image: none,
   ),
 )
 
