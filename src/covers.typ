@@ -7,6 +7,7 @@
   subject-area: "Technology",
   cycle: 2,
   credits: 15,
+  cover-image: none,
   style,
 ) = page(
   margin: (top: 12.5mm, rest: 25mm),
@@ -43,12 +44,12 @@
       linebreak()
     }
 
-    // 800 twips (40pt) of vertical space, 120 twips after author and 680 twips before image
-    // as per official KTH cover template
-    v(40pt)
+    if cover-image != none {
+      // from official cover template: 120 twips after author + 680 twips before
+      // image = 800 twips = 40pt of vertical space
+      v(40pt)
 
-    if style.cover-image != none {
-      style.cover-image
+      cover-image
     }
   },
 )

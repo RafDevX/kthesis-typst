@@ -129,6 +129,13 @@
       city: "Stockholm",
     ),
   ),
+  // Optional image to show on the front cover.
+  // This should either be none, or an "image" element. For example,
+  // cover-image: image("./assets/cover.png", width: 100%)
+  // If provided, the image can be formatted arbitrarily to look however desired
+  // (especially its height, width, and fit mode). However, the recommended
+  // styles are (width: 100%) or (width: 16cm, height: 10cm, fit: "contain").
+  cover-image: none,
   // Acknowledgements body
   acknowledgements: {
     par(lorem(100))
@@ -174,6 +181,7 @@
   assert-arg-type("host-org", host-org, str, optional: true)
   assert-arg-type("opponents", opponents, array, optional: true)
   assert-arg-type("presentation", presentation, dictionary, optional: true)
+  assert-arg-type("cover-image", cover-image, content, optional: true)
   assert-arg-type("acknowledgements", acknowledgements, content)
   assert-arg-type("extra-preambles", extra-preambles, array)
   assert-arg-type("doc-date", doc-date, datetime)
@@ -187,7 +195,6 @@
       more-sans-serif: false,
       use-arial: false,
       fancy-chapters: false,
-      cover-image: none,
     )
       + style // provided values have higher precedence over default values
   )
@@ -222,6 +229,7 @@
     subject-area: degree.at("subject-area"),
     cycle: degree.at("cycle"),
     credits: course.at("credits"),
+    cover-image: cover-image,
     style,
   )
 

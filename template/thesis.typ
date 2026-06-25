@@ -140,6 +140,13 @@
       city: "Stockholm",
     ),
   ),
+  // Optional image to show on the front cover.
+  // This should either be none, or an "image" element. For example,
+  // cover-image: image("./assets/cover.png", width: 100%)
+  // If provided, the image can be formatted arbitrarily to look however desired
+  // (especially its height, width, and fit mode). However, the recommended
+  // styles are (width: 100%) or (width: 16cm, height: 10cm, fit: "contain").
+  cover-image: none,
   // Acknowledgements body
   acknowledgements: include "content/acknowledgements.typ",
   // Additional front-matter sections, each with keys "heading" and "body"
@@ -168,9 +175,6 @@
     more-sans-serif: false,
     // Whether to make top-level headings stand out more and look less plain
     fancy-chapters: false,
-    // Pass cover image using the typst `image` function, e.g.
-    // cover-image: image("image.png", width: 16cm, height: 10cm)
-    cover-image: none,
   ),
 )
 

@@ -88,6 +88,7 @@ available:
 - `host-org`: Organization hosting the degree project, if any
 - `opponents`: Names of assigned opponents, if known
 - `presentation`: Final presentation details, if known
+- `cover-image`: Image to include on the front cover, if any
 - `acknowledgements`: Body of acknowledgements section
 - `extra-preambles`: Additional, arbitrary front-matter sections, if needed
 - `doc-date`: Document authoring/submission date
