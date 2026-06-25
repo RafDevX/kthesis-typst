@@ -27,6 +27,6 @@ fi
 
 
 mkdir "$DEST"
-git ls-files -z | grep -zv "release-to.sh" | rsync -a --files-from=- --from0 ./ "$DEST"
+git ls-files -z | grep -zvf ".releaseignore" | rsync -a --files-from=- --from0 ./ "$DEST"
 
 echo "Success! Released version $VERSION"
