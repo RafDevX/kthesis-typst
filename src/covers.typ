@@ -42,6 +42,14 @@
       strong(upper(author))
       linebreak()
     }
+
+    // 800 twips (40pt) of vertical space, 120 twips after author and 680 twips before image
+    // as per official KTH cover template
+    v(40pt)
+
+    if style.cover-image != none {
+      style.cover-image
+    }
   },
 )
 

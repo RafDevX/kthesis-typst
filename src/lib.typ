@@ -153,6 +153,7 @@
       more-sans-serif: false,
       use-arial: false,
       fancy-chapters: false,
+      cover-image: none,
     )
       + style // provided values have higher precedence over default values
   )
