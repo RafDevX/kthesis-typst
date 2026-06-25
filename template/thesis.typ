@@ -3,7 +3,7 @@
 // The template is extensible and plays well with other dependencies;
 // For example, a table of acronyms can be generated using glossarium
 #import "@preview/glossarium:0.5.10": (
-  make-glossary, print-glossary, register-glossary
+  make-glossary, print-glossary, register-glossary,
 )
 #import "./acronyms.typ": acronyms
 #show: make-glossary
