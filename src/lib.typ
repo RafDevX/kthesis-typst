@@ -3,7 +3,8 @@
 #import "./styling-setup.typ": *
 #import "./for-diva.typ": for-diva-json
 #import "./utils.typ": (
-  assert-arg-type, extract-name, get-one-liner, maybe-sans-serif,
+  assert-arg-type, extract-name, get-one-liner, maybe-sans-serif, z,
+  z-arbitrarily-keyed-dict, z-matches-regex,
 )
 
 #let kth-thesis(
@@ -161,34 +162,151 @@
   // incorrect arguments can lead to very strange errors that are hard to debug
   // (especially when accidentally using `(x)` instead of `(x,)` to construct an
   // array, leading to no array being constructed at all)
-  // this only applies very simple type checking to top-level arguments, it is
-  // just a small convenience to catch the most obvious errors
-  assert-arg-type("primary-lang", primary-lang, str)
-  assert-arg-type("localized-info", localized-info, dictionary)
-  assert-arg-type("authors", authors, array)
-  assert-arg-type("supervisors", supervisors, array)
-  assert-arg-type("examiner", examiner, dictionary)
-  assert-arg-type("course", course, dictionary)
-  assert-arg-type("degree", degree, dictionary)
+  // note that this is not necessarily exhaustive and is intended just as a
+  // convenience, so that obvious problems surface immediately and clearly
+
+  assert-arg-type("primary-lang", primary-lang, z.choice(("en", "sv")))
+  assert-arg-type("localized-info", localized-info, z-arbitrarily-keyed-dict(
+    "localized-info",
+    z.string(assertions: (z.assert.length.equals(2),)),
+    z.dictionary(
+      (
+        alpha-3: z.string(optional: true, assertions: (
+          z.assert.length.equals(3),
+        )),
+        title: z.string(min: 1),
+        subtitle: z.string(optional: true, min: 1),
+        abstract: z.content(),
+        keywords: z.array(z.string(min: 1)),
+      ),
+    ),
+    min: 1,
+  ))
+  assert-arg-type("authors", authors, z.array(
+    z.dictionary((
+      first-name: z.string(min: 1),
+      last-names: z.string(min: 1),
+      email: z.email(optional: true),
+      user-id: z.string(optional: true, min: 1),
+      school: z.string(optional: true, min: 1),
+      department: z.string(optional: true, min: 1),
+    )),
+    min: 1,
+  ))
+  let internal-person = z.dictionary((
+    first-name: z.string(min: 1),
+    last-names: z.string(min: 1),
+    email: z.email(),
+    user-id: z.string(min: 1),
+    school: z.string(min: 1),
+    department: z.string(min: 1),
+  ))
+  assert-arg-type("supervisors", supervisors, z.array(
+    z.either(internal-person, z.dictionary((
+      first-name: z.string(min: 1),
+      last-names: z.string(min: 1),
+      email: z.email(),
+      external-org: z.string(min: 1),
+    ))),
+    min: 1,
+  ))
+  assert-arg-type("examiner", examiner, internal-person)
+  assert-arg-type("course", course, z.dictionary((
+    code: z.string(min: 1),
+    credits: z.number(min: 1),
+  )))
+  assert-arg-type("degree", degree, z.dictionary((
+    code: z.string(min: 1),
+    name: z.string(min: 1),
+    subject-area: z.string(min: 1),
+    kind: z.string(min: 1),
+    cycle: z.number(min: 1, max: 2), // better error messages than z.choice
+  )))
   assert-arg-type(
     "national-subject-categories",
     national-subject-categories,
-    array,
+    z.array(
+      z.string(min: 3, max: 5, assertions: z-matches-regex(
+        "^\d+$",
+        "All characters must be digits",
+      )),
+      min: 1,
+    ),
   )
-  assert-arg-type("school", school, str)
-  assert-arg-type("trita-number", trita-number, str)
-  assert-arg-type("host-company", host-company, str, optional: true)
-  assert-arg-type("host-org", host-org, str, optional: true)
-  assert-arg-type("opponents", opponents, array, optional: true)
-  assert-arg-type("presentation", presentation, dictionary, optional: true)
-  assert-arg-type("cover-image", cover-image, content, optional: true)
-  assert-arg-type("acknowledgements", acknowledgements, content)
-  assert-arg-type("extra-preambles", extra-preambles, array)
-  assert-arg-type("doc-date", doc-date, datetime)
-  assert-arg-type("doc-city", doc-city, str)
-  assert-arg-type("doc-extra-keywords", doc-extra-keywords, array)
-  assert-arg-type("with-for-diva", with-for-diva, bool)
-  assert-arg-type("style", style, dictionary)
+  assert-arg-type("school", school, z.choice((
+    "ABE",
+    "EECS",
+    "ITM",
+    "CBH",
+    "SCI",
+  )))
+  assert-arg-type("trita-number", trita-number, z.string(
+    assertions: z-matches-regex("\d{4}:\d+", "Must follow format `2026:0000`"),
+  ))
+  assert-arg-type("host-company", host-company, z.string(
+    optional: true,
+    min: 1,
+  ))
+  assert-arg-type("host-org", host-org, z.string(optional: true, min: 1))
+  assert-arg-type("opponents", opponents, z.array(
+    z.string(min: 1),
+    optional: true,
+    min: 1,
+  ))
+  assert-arg-type("presentation", presentation, z.dictionary(
+    (
+      language: z.choice(("en", "sv")),
+      slot: z.date(),
+      online: z.dictionary(
+        (service: z.string(min: 1), link: z.string(min: 1)),
+        optional: true,
+      ),
+      location: z.dictionary(
+        (
+          room: z.string(min: 1),
+          address: z.string(min: 1),
+          city: z.string(min: 1),
+        ),
+        optional: true,
+      ),
+    ),
+    optional: true,
+    assertions: (
+      (
+        condition: (_, it) => (
+          it.at("online", default: none) != none
+            or it.at("location", default: none) != none
+        ),
+        message: (_, it) => "Either \"online\" or \"location\" must be set",
+      ),
+    ),
+  ))
+  assert-arg-type("cover-image", cover-image, z.content(optional: true))
+  assert-arg-type(
+    "acknowledgements",
+    acknowledgements,
+    z.content(optional: true),
+  )
+  assert-arg-type("extra-preambles", extra-preambles, z.array(z.dictionary((
+    heading: z.string(min: 1),
+    body: z.content(),
+  ))))
+  assert-arg-type("doc-date", doc-date, z.date())
+  assert-arg-type("doc-city", doc-city, z.string(min: 1))
+  assert-arg-type("doc-extra-keywords", doc-extra-keywords, z.array(
+    z.string(min: 1),
+  ))
+  assert-arg-type("with-for-diva", with-for-diva, z.boolean())
+  assert-arg-type("style", style, z.dictionary(
+    (
+      use-arial: z.boolean(optional: true),
+      more-sans-serif: z.boolean(optional: true),
+      fancy-chapters: z.boolean(optional: true),
+    ),
+    optional: true,
+  ))
+
+  // ---------- END OF MANUAL TYPE CHECKING ----------
 
   let style = (
     (

@@ -1,4 +1,5 @@
 #import "@preview/linguify:0.5.0": linguify
+#import "@preview/valkyrie:0.2.2" as z
 
 #let kth-blue = rgb("#004791")
 #let kth-navy = rgb("#000061")
@@ -7,19 +8,37 @@
 
 #let t = key => linguify(key, from: lang-db)
 
-#let assert-arg-type(name, value, expected_type, optional: false) = {
-  if optional and value == none {
-    // all good
-    return
-  }
+#let assert-arg-type(name, value, schema) = {
+  let _ = z.parse(value, schema, scope: ("kthesis argument " + name,))
+}
 
-  assert.eq(
-    type(value),
-    expected_type,
-    message: "kthesis argument `"
-      + name
-      + "` must be of type "
-      + str(expected_type),
+#let z-arbitrarily-keyed-dict(name, k-schema, v-schema, ..args) = {
+  // see: https://github.com/typst-community/valkyrie/issues/53#issuecomment-3297983717
+  // this feature is missing from valkyrie so we have to implement it manually
+  // using transformations to validate as an array of pairs
+
+  return z.array(
+    z.tuple(k-schema, v-schema),
+    pre-transform: (_, it) => {
+      assert.eq(
+        type(it),
+        dictionary,
+        message: "kthesis argument `" + name + "` must be a dictionary",
+      )
+
+      it.pairs()
+    },
+    post-transform: (_, it) => it.fold((:), (acc, (k, v)) => acc + ((k): v)),
+    ..args,
+  )
+}
+
+#let z-matches-regex(pattern, message) = {
+  return (
+    (
+      condition: (_, it) => it.match(regex(pattern)) != none,
+      message: (_, it) => message,
+    ),
   )
 }
 
