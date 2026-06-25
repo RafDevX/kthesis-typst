@@ -12,10 +12,24 @@
   let _ = z.parse(value, schema, scope: ("kthesis argument " + name,))
 }
 
-#let z-arbitrarily-keyed-dict(name, k-schema, v-schema, ..args) = {
+#let z-arbitrarily-keyed-dict(
+  name,
+  k-schema,
+  v-schema,
+  require-keys: (),
+  assertions: (),
+  ..args,
+) = {
   // see: https://github.com/typst-community/valkyrie/issues/53#issuecomment-3297983717
   // this feature is missing from valkyrie so we have to implement it manually
   // using transformations to validate as an array of pairs
+
+  for req in require-keys {
+    assertions.push((
+      condition: (_, it) => it.find(((k, _)) => k == req) != none,
+      message: (_, it) => "Must contain key `" + req + "`",
+    ))
+  }
 
   return z.array(
     z.tuple(k-schema, v-schema),
@@ -29,6 +43,7 @@
       it.pairs()
     },
     post-transform: (_, it) => it.fold((:), (acc, (k, v)) => acc + ((k): v)),
+    assertions: assertions,
     ..args,
   )
 }

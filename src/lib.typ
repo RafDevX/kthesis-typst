@@ -181,6 +181,7 @@
       ),
     ),
     min: 1,
+    require-keys: ("en", "sv"),
   ))
   assert-arg-type("authors", authors, z.array(
     z.dictionary((
