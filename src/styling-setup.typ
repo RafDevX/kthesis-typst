@@ -1,7 +1,7 @@
 #import "./utils.typ": kth-blue, maybe-sans-serif, t
 
-#import "@preview/headcount:0.1.0": dependent-numbering
-#import "@preview/hydra:0.6.2": hydra
+#import "@preview/headcount:0.1.1": dependent-numbering
+#import "@preview/hydra:0.6.3": hydra
 
 #let header(style) = context {
   set text(font: maybe-sans-serif(style))
